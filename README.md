@@ -1,0 +1,1 @@
+My solutions to Statistics with Linear Models course at Master's in AI at the University of Wrocław.
