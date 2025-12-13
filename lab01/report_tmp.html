@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>report.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="raport-z-listy-1">Raport z listy 1</h1>
+<p>W zadaniach generujemy wektory obserwacji z różnych rozkładów a następnie porównujemy dla nich różne estymatory.</p>
+<p>Oznaczenia przyjmuję analogiczne do treści zadań. W wykresach stosuję często 'Theta_i' zamiast $\theta_i$.</p>
+<p>Do porównania estymatorów stosuje wykresy zgodnie z treścią zadań oraz charakterystyki:</p>
+<ul>
+<li>$bias(\hat{\theta}) = E\hat{\theta} - \theta$</li>
+<li>$var(\hat{\theta}) = E(\hat{\theta} - E\hat{\theta})^2$</li>
+<li>$MSE(\hat{\theta}) = E(\hat{\theta} - \theta)^2 = bias^2(\hat{\theta}) + var(\hat{\theta})$</li>
+</ul>
+<h2 id="zadanie-1">Zadanie 1</h2>
+<p>Estymatory są oznaczone zgodnie z treścią zadania. Jako własny estymator wybrałem $trimmed$ $mean$, który sortuje wartości i odrzuca kilka największych i kilka najmniejszych z nich. W moim przypadku 10% najmniejszych i 10% największych wartości. Taki estymator powinien być mniej wrażliwy na odstające wartości niż zwykła średnia.</p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma1_n50_theta5True.png" alt="Boxplot1 θ=0, σ=1, n=50, theta5"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma2_n50_theta5True.png" alt="Boxplot1 θ=0, σ=2, n=50, theta5"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma1_n50_theta5True.png" alt="Boxplot1 θ=4, σ=1, n=50, theta5"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma2_n50_theta5True.png" alt="Boxplot1 θ=4, σ=2, n=50, theta5"></p>
+<p><strong>Komentarz:</strong>
+$\hat\theta_5$ znacząco zaburza wykres przez outliery. Pojawiają się one gdy mianownik w średniej harmonicznej jest bliski $0$. Wtedy średnia potrafi być bardzo daleko od $\theta$. Widać to bardziej w przypadku gdy $\theta = 0$ bo wartości $X_i$ są skupione wokół $0$. Z tego powodu zamieszczam pełne wykresy tylko dla $n=50$. Kolejne wykresy zamieszczam już bez tego estymatora.</p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma1_n50_theta5False.png" alt="Boxplot1 θ=0, σ=1, n=50"></p>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=1, n=50</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0204835</td>
+<td style="text-align:right">-0.0025871</td>
+<td style="text-align:right">0.0204902</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0311175</td>
+<td style="text-align:right">-0.000905165</td>
+<td style="text-align:right">0.0311183</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0278457</td>
+<td style="text-align:right">-0.00208471</td>
+<td style="text-align:right">0.0278501</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.00978646</td>
+<td style="text-align:right">0.973451</td>
+<td style="text-align:right">0.957394</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">1480.16</td>
+<td style="text-align:right">-0.0212943</td>
+<td style="text-align:right">1480.16</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.525383</td>
+<td style="text-align:right">-0.0117048</td>
+<td style="text-align:right">0.52552</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0217319</td>
+<td style="text-align:right">-0.00236031</td>
+<td style="text-align:right">0.0217375</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma2_n50_theta5False.png" alt="Boxplot1 θ=0, σ=2, n=50"></p>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=2, n=50</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0805862</td>
+<td style="text-align:right">-0.0015959</td>
+<td style="text-align:right">0.0805887</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.122034</td>
+<td style="text-align:right">-0.00324556</td>
+<td style="text-align:right">0.122045</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.109046</td>
+<td style="text-align:right">-0.00226918</td>
+<td style="text-align:right">0.109051</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.0389745</td>
+<td style="text-align:right">1.94186</td>
+<td style="text-align:right">3.8098</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">57873.4</td>
+<td style="text-align:right">-3.69233</td>
+<td style="text-align:right">57887.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">2.08224</td>
+<td style="text-align:right">0.00156554</td>
+<td style="text-align:right">2.08224</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0852446</td>
+<td style="text-align:right">-0.00177263</td>
+<td style="text-align:right">0.0852478</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma1_n50_theta5False.png" alt="Boxplot1 θ=4, σ=1, n=50"></p>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=1, n=50</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0201919</td>
+<td style="text-align:right">-0.00076519</td>
+<td style="text-align:right">0.0201925</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0306954</td>
+<td style="text-align:right">-0.00163849</td>
+<td style="text-align:right">0.0306981</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0273264</td>
+<td style="text-align:right">-0.000327248</td>
+<td style="text-align:right">0.0273265</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.00982365</td>
+<td style="text-align:right">-3.0283</td>
+<td style="text-align:right">9.1804</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">0.0915559</td>
+<td style="text-align:right">-0.292986</td>
+<td style="text-align:right">0.177397</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.0202126</td>
+<td style="text-align:right">0.230716</td>
+<td style="text-align:right">0.0734425</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0214451</td>
+<td style="text-align:right">-0.000804182</td>
+<td style="text-align:right">0.0214458</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma2_n50_theta5False.png" alt="Boxplot1 θ=4, σ=2, n=50"></p>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=2, n=50</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0793975</td>
+<td style="text-align:right">-0.00380457</td>
+<td style="text-align:right">0.079412</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.123074</td>
+<td style="text-align:right">-0.00256026</td>
+<td style="text-align:right">0.12308</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.106963</td>
+<td style="text-align:right">-0.00300974</td>
+<td style="text-align:right">0.106972</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.0387001</td>
+<td style="text-align:right">-2.06098</td>
+<td style="text-align:right">4.28635</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">2450.72</td>
+<td style="text-align:right">-0.510769</td>
+<td style="text-align:right">2450.98</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.0781065</td>
+<td style="text-align:right">0.798689</td>
+<td style="text-align:right">0.71601</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0840545</td>
+<td style="text-align:right">-0.00376679</td>
+<td style="text-align:right">0.0840687</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Komentarz:</strong></p>
+<ul>
+<li>$\hat\theta_1$ (średnia) jest najlepszym estymatorem. Jest nieobciążony i ma najmniejszy mse. Analogicznie $\hat\theta_7$ co wynika z doboru tego estymatora, ale o tym za chwilę.</li>
+<li>$\hat\theta_2$ (mediana) również jest nieobciążonym estymatorem, jednak trochę gorszym niż średnia.</li>
+<li>Kolejnym precyzyjnym estymatorem jest $\hat\theta_3$. Charakterystyki mają podobne wartości do średniej, co wynika z definicji tego estymatora.</li>
+<li>$\hat\theta_4$ daje bardzo słabe wyniki. Ma duży bias i mse. Nie jest dobrym estymatorem.</li>
+<li>$\hat\theta_5$ omówiony wcześniej. tutaj jeszcze słabe charakterystyki tego estymatora są widoczne w tabelkach.</li>
+<li>$\hat\theta_6$ to kolejny słaby estymator.</li>
+<li>$\hat\theta_7$ jest bardzo zbliżony do średniej. Powinien dawać lepsze wyniki niż średnia w przypadku dalekich outlierów, jednak rozkład normalny nie ma ich zbyt dużo. W tym zadaniu osiąga nawet minimalnie gorsze wartości niż zwykła średnia.</li>
+</ul>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma1_n20_theta5False.png" alt="Boxplot1 θ=0, σ=1, n=20"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma1_n100_theta5False.png" alt="Boxplot1 θ=0, σ=1, n=100"></p>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=1, n=20</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0517449</td>
+<td style="text-align:right">0.000517699</td>
+<td style="text-align:right">0.0517451</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0740105</td>
+<td style="text-align:right">9.40662e-05</td>
+<td style="text-align:right">0.0740105</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0724033</td>
+<td style="text-align:right">0.00105446</td>
+<td style="text-align:right">0.0724044</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.0231738</td>
+<td style="text-align:right">0.932169</td>
+<td style="text-align:right">0.892113</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">19919.2</td>
+<td style="text-align:right">1.38209</td>
+<td style="text-align:right">19921.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.688186</td>
+<td style="text-align:right">-0.00143511</td>
+<td style="text-align:right">0.688188</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0542978</td>
+<td style="text-align:right">0.00121827</td>
+<td style="text-align:right">0.0542993</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=1, n=100</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.00999276</td>
+<td style="text-align:right">0.000135296</td>
+<td style="text-align:right">0.00999278</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0154535</td>
+<td style="text-align:right">0.0012887</td>
+<td style="text-align:right">0.0154552</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0128797</td>
+<td style="text-align:right">0.000334447</td>
+<td style="text-align:right">0.0128798</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.00492035</td>
+<td style="text-align:right">0.984749</td>
+<td style="text-align:right">0.974651</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">2072.9</td>
+<td style="text-align:right">0.0530262</td>
+<td style="text-align:right">2072.9</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.418277</td>
+<td style="text-align:right">0.00139903</td>
+<td style="text-align:right">0.418279</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0105974</td>
+<td style="text-align:right">0.000187811</td>
+<td style="text-align:right">0.0105974</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma2_n20_theta5False.png" alt="Boxplot1 θ=0, σ=2, n=20"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta0_sigma2_n100_theta5False.png" alt="Boxplot1 θ=0, σ=2, n=100"></p>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=2, n=20</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.196514</td>
+<td style="text-align:right">0.000282067</td>
+<td style="text-align:right">0.196514</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.290236</td>
+<td style="text-align:right">-0.00266947</td>
+<td style="text-align:right">0.290243</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.280163</td>
+<td style="text-align:right">-0.00162155</td>
+<td style="text-align:right">0.280165</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.0931464</td>
+<td style="text-align:right">1.85907</td>
+<td style="text-align:right">3.54927</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">9515.32</td>
+<td style="text-align:right">1.35746</td>
+<td style="text-align:right">9517.16</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">2.71751</td>
+<td style="text-align:right">0.00119541</td>
+<td style="text-align:right">2.71752</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.206057</td>
+<td style="text-align:right">-0.000366422</td>
+<td style="text-align:right">0.206057</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=2, n=100</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0403461</td>
+<td style="text-align:right">5.54498e-05</td>
+<td style="text-align:right">0.0403461</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0617297</td>
+<td style="text-align:right">0.00126558</td>
+<td style="text-align:right">0.0617313</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0516364</td>
+<td style="text-align:right">-0.000564101</td>
+<td style="text-align:right">0.0516367</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.0194678</td>
+<td style="text-align:right">1.96807</td>
+<td style="text-align:right">3.89275</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">10759.4</td>
+<td style="text-align:right">-1.21132</td>
+<td style="text-align:right">10760.9</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">1.68096</td>
+<td style="text-align:right">-0.00558785</td>
+<td style="text-align:right">1.68099</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0423343</td>
+<td style="text-align:right">0.000475587</td>
+<td style="text-align:right">0.0423346</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma1_n20_theta5False.png" alt="Boxplot1 θ=4, σ=1, n=20"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma1_n100_theta5False.png" alt="Boxplot1 θ=4, σ=1, n=100"></p>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=1, n=20</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0500678</td>
+<td style="text-align:right">-0.000281489</td>
+<td style="text-align:right">0.0500679</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0727258</td>
+<td style="text-align:right">-0.000626701</td>
+<td style="text-align:right">0.0727261</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.071109</td>
+<td style="text-align:right">0.000234418</td>
+<td style="text-align:right">0.071109</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.0227986</td>
+<td style="text-align:right">-3.06635</td>
+<td style="text-align:right">9.4253</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">10.2407</td>
+<td style="text-align:right">-0.31209</td>
+<td style="text-align:right">10.3381</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.0499643</td>
+<td style="text-align:right">0.224596</td>
+<td style="text-align:right">0.100408</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0526963</td>
+<td style="text-align:right">-0.000258998</td>
+<td style="text-align:right">0.0526964</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=1, n=100</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0102772</td>
+<td style="text-align:right">0.000486301</td>
+<td style="text-align:right">0.0102775</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.015595</td>
+<td style="text-align:right">8.05112e-05</td>
+<td style="text-align:right">0.015595</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0130003</td>
+<td style="text-align:right">-0.000256939</td>
+<td style="text-align:right">0.0130004</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.00491483</td>
+<td style="text-align:right">-3.01503</td>
+<td style="text-align:right">9.09535</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">0.296166</td>
+<td style="text-align:right">-0.298597</td>
+<td style="text-align:right">0.385326</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.0102639</td>
+<td style="text-align:right">0.234015</td>
+<td style="text-align:right">0.0650268</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0108694</td>
+<td style="text-align:right">0.000293129</td>
+<td style="text-align:right">0.0108695</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma2_n20_theta5False.png" alt="Boxplot1 θ=4, σ=2, n=20"></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad1/theta4_sigma2_n100_theta5False.png" alt="Boxplot1 θ=4, σ=2, n=100"></p>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=2, n=20</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.195642</td>
+<td style="text-align:right">-0.00195183</td>
+<td style="text-align:right">0.195646</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.289186</td>
+<td style="text-align:right">-0.00172764</td>
+<td style="text-align:right">0.289189</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.282903</td>
+<td style="text-align:right">0.00252749</td>
+<td style="text-align:right">0.282909</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.094582</td>
+<td style="text-align:right">-2.13792</td>
+<td style="text-align:right">4.66527</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">5104.41</td>
+<td style="text-align:right">-0.604656</td>
+<td style="text-align:right">5104.78</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.196227</td>
+<td style="text-align:right">0.777175</td>
+<td style="text-align:right">0.800229</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.205736</td>
+<td style="text-align:right">-0.00221078</td>
+<td style="text-align:right">0.205741</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=2, n=100</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0390363</td>
+<td style="text-align:right">-0.00300797</td>
+<td style="text-align:right">0.0390454</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0601778</td>
+<td style="text-align:right">-0.00178989</td>
+<td style="text-align:right">0.060181</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0499667</td>
+<td style="text-align:right">-0.00222106</td>
+<td style="text-align:right">0.0499716</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_4</td>
+<td style="text-align:right">0.019882</td>
+<td style="text-align:right">-2.02932</td>
+<td style="text-align:right">4.13802</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_5</td>
+<td style="text-align:right">1798.87</td>
+<td style="text-align:right">-0.627797</td>
+<td style="text-align:right">1799.26</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_6</td>
+<td style="text-align:right">0.0392375</td>
+<td style="text-align:right">0.80956</td>
+<td style="text-align:right">0.694626</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_7</td>
+<td style="text-align:right">0.0413446</td>
+<td style="text-align:right">-0.00216081</td>
+<td style="text-align:right">0.0413493</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Komentarz:</strong>
+Wraz ze wzrostem $n$, charakterystyki poprawiają się dla dobrych estymatorów. Dla złych estymatorów, co nie zmienia faktu, że pozostają one wyraźnie złe.</p>
+<h2 id="zadanie-2">Zadanie 2</h2>
+<p><strong>Wykresy pudełkowe estymatorów dla rozkładów $N(\theta, \sigma^2)$, $Logist(\theta, \sigma^2)$, $Cauchy(\theta, \sigma^2)$</strong></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta0_sigma1.png" alt="Boxplot θ=0, σ=1">
+<img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta0_sigma2.png" alt="Boxplot θ=0, σ=2">
+<img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta4_sigma1.png" alt="Boxplot θ=4, σ=1">
+<img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta4_sigma2.png" alt="Boxplot θ=4, σ=2"></p>
+<p><strong>Komentarz:</strong>
+Wykresy są mało czytelne, ponieważ estymator $\theta_1$ (średnia) dla rozkładu Cauchy'ego nie jest dobrym estymatorem. Jest tak, ponieważ rozkład Cauchy'ego nie ma skończonej wartości oczekiwanej. Średnia z próby może być przesunięta przez pojedyncze wartości leżące daleko od położenia rozkładu. Widać to na wykresie. Z tego powodu na kolejnych wykresach pomijam ten estymator.</p>
+<p><strong>Wykresy pudełkowe bez $\theta_1$ dla rozkładu Cauchy'ego</strong></p>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta0_sigma1_no_cauchy_theta1.png" alt="Boxplot θ=0, σ=1 (no cauchy_theta_1)"></p>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=1</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Distribution</th>
+<th style="text-align:left">Estimator</th>
+<th style="text-align:right">Bias</th>
+<th style="text-align:right">Variance</th>
+<th style="text-align:right">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">1.00762</td>
+<td style="text-align:right">9854.84</td>
+<td style="text-align:right">9855.86</td>
+</tr>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.000954526</td>
+<td style="text-align:right">0.0528114</td>
+<td style="text-align:right">0.0528123</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-0.000669939</td>
+<td style="text-align:right">0.0647091</td>
+<td style="text-align:right">0.0647096</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00148213</td>
+<td style="text-align:right">0.0787596</td>
+<td style="text-align:right">0.0787618</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-0.00244808</td>
+<td style="text-align:right">0.0198358</td>
+<td style="text-align:right">0.0198418</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00176751</td>
+<td style="text-align:right">0.0306577</td>
+<td style="text-align:right">0.0306608</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta0_sigma2_no_cauchy_theta1.png" alt="Boxplot θ=0, σ=2 (no cauchy_theta_1)"></p>
+<p><strong>Podsumowanie estymatorów dla θ=0, σ=2</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Distribution</th>
+<th style="text-align:left">Estimator</th>
+<th style="text-align:right">Bias</th>
+<th style="text-align:right">Variance</th>
+<th style="text-align:right">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-6.28273</td>
+<td style="text-align:right">269833</td>
+<td style="text-align:right">269872</td>
+</tr>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00853955</td>
+<td style="text-align:right">0.203015</td>
+<td style="text-align:right">0.203088</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-0.00140494</td>
+<td style="text-align:right">0.265433</td>
+<td style="text-align:right">0.265435</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00111727</td>
+<td style="text-align:right">0.31974</td>
+<td style="text-align:right">0.319741</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.00395633</td>
+<td style="text-align:right">0.0798637</td>
+<td style="text-align:right">0.0798793</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.00403306</td>
+<td style="text-align:right">0.122367</td>
+<td style="text-align:right">0.122383</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta4_sigma1_no_cauchy_theta1.png" alt="Boxplot θ=4, σ=1 (no cauchy_theta_1)"></p>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=1</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Distribution</th>
+<th style="text-align:left">Estimator</th>
+<th style="text-align:right">Bias</th>
+<th style="text-align:right">Variance</th>
+<th style="text-align:right">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-0.512352</td>
+<td style="text-align:right">1834.97</td>
+<td style="text-align:right">1835.23</td>
+</tr>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.0036391</td>
+<td style="text-align:right">0.0507204</td>
+<td style="text-align:right">0.0507337</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-0.00312843</td>
+<td style="text-align:right">0.0664254</td>
+<td style="text-align:right">0.0664352</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00237612</td>
+<td style="text-align:right">0.0803025</td>
+<td style="text-align:right">0.0803082</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.00256483</td>
+<td style="text-align:right">0.0199143</td>
+<td style="text-align:right">0.0199209</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.00328088</td>
+<td style="text-align:right">0.0306682</td>
+<td style="text-align:right">0.0306789</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad2/boxplot_theta4_sigma2_no_cauchy_theta1.png" alt="Boxplot θ=4, σ=2 (no cauchy_theta_1)"></p>
+<p><strong>Podsumowanie estymatorów dla θ=4, σ=2</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Distribution</th>
+<th style="text-align:left">Estimator</th>
+<th style="text-align:right">Bias</th>
+<th style="text-align:right">Variance</th>
+<th style="text-align:right">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-14.0043</td>
+<td style="text-align:right">1.48413e+06</td>
+<td style="text-align:right">1.48432e+06</td>
+</tr>
+<tr>
+<td style="text-align:left">cauchy</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00246518</td>
+<td style="text-align:right">0.205415</td>
+<td style="text-align:right">0.205422</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.00137745</td>
+<td style="text-align:right">0.261095</td>
+<td style="text-align:right">0.261097</td>
+</tr>
+<tr>
+<td style="text-align:left">logist</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-2.09628e-05</td>
+<td style="text-align:right">0.312594</td>
+<td style="text-align:right">0.312594</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">-0.00103192</td>
+<td style="text-align:right">0.0800178</td>
+<td style="text-align:right">0.0800189</td>
+</tr>
+<tr>
+<td style="text-align:left">normal</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">-0.00102479</td>
+<td style="text-align:right">0.121482</td>
+<td style="text-align:right">0.121483</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Komentarz:</strong></p>
+<ul>
+<li>Cauchy: Średnia nie jest sensownym estymatorem, natomiast mediana jest nieobciążona.</li>
+<li>Logist: Oba estymatory są nieobciążone, natomiast średnia jest bardziej efektywna.</li>
+<li>Normal: Tutaj również oba estymatory są nieobciążone i średnia jest bardziej efektywna od mediany.</li>
+<li>Wariancje dla estymatorów w rozkładzie Logist i Cauchy są większe, ponieważ te rozkłady mają cięższe ogony niż rozkład normalny.</li>
+</ul>
+<h1 id="zadanie-3">Zadanie 3</h1>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad3/bias_vs_k.png" alt="plot bias">
+<img src="file:///Users/kuba/studia/statystyka/lab01/zad3/variance_vs_k.png" alt="plot variance">
+<img src="file:///Users/kuba/studia/statystyka/lab01/zad3/mse_vs_k.png" alt="plot mse"></p>
+<p><strong>podsumowanie estymatorów</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">k</th>
+<th style="text-align:left">Estimator</th>
+<th style="text-align:right">Bias</th>
+<th style="text-align:right">Variance</th>
+<th style="text-align:right">MSE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.20049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">0.059752</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">20</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.40049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">0.179948</td>
+</tr>
+<tr>
+<td style="text-align:right">20</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">30</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.60049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">0.380144</td>
+</tr>
+<tr>
+<td style="text-align:right">30</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">40</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.80049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">0.66034</td>
+</tr>
+<tr>
+<td style="text-align:right">40</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">1.00049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">1.02054</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">60</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">1.20049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">1.46073</td>
+</tr>
+<tr>
+<td style="text-align:right">60</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">70</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">1.40049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">1.98093</td>
+</tr>
+<tr>
+<td style="text-align:right">70</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">80</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">1.60049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">2.58113</td>
+</tr>
+<tr>
+<td style="text-align:right">80</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">90</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">1.80049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">3.26132</td>
+</tr>
+<tr>
+<td style="text-align:right">90</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">2.00049</td>
+<td style="text-align:right">0.0195556</td>
+<td style="text-align:right">4.02152</td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0239111</td>
+<td style="text-align:right">0.0318637</td>
+<td style="text-align:right">0.0324354</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Komentarz:</strong></p>
+<ul>
+<li>Bias rośnie liniowo dla średniej. Dodanie jednej dużej wartości do próbki powoduje, że średnia rośnie w jej kierunku. Dla mediany bias nie rośnie, ponieważ mediana jest odporna na tę jedną odstającą wartość.</li>
+<li>Wariancja jest stała, ponieważ k to stała, więc nie wpływa na wariancję.</li>
+<li>MSE to $bias^2 + var$, więc dla średniej rośnie kwadratowo a dla mediany nie zależy od k.</li>
+</ul>
+<h1 id="zadanie-4">Zadanie 4</h1>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad4/mu0_theta1.png" alt="Boxplot4 μ=0, θ=1"></p>
+<p><strong>Podsumowanie estymatorów μ=0, θ=1</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0413177</td>
+<td style="text-align:right">0.00089363</td>
+<td style="text-align:right">0.0413185</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.0424278</td>
+<td style="text-align:right">0.0115404</td>
+<td style="text-align:right">0.042561</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0225959</td>
+<td style="text-align:right">-0.535584</td>
+<td style="text-align:right">0.309446</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad4/mu0_theta4.png" alt="Boxplot4 μ=0, θ=4"></p>
+<p><strong>Podsumowanie estymatorów μ=0, θ=4</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.655936</td>
+<td style="text-align:right">-0.00403593</td>
+<td style="text-align:right">0.655952</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.675235</td>
+<td style="text-align:right">0.0402511</td>
+<td style="text-align:right">0.676855</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.36753</td>
+<td style="text-align:right">-2.14418</td>
+<td style="text-align:right">4.96506</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad4/mu4_theta1.png" alt="Boxplot4 μ=4, θ=1"></p>
+<p><strong>Podsumowanie estymatorów μ=4, θ=1</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.0414645</td>
+<td style="text-align:right">-0.0021624</td>
+<td style="text-align:right">0.0414691</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.04264</td>
+<td style="text-align:right">0.00877086</td>
+<td style="text-align:right">0.0427169</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.0226316</td>
+<td style="text-align:right">-0.536303</td>
+<td style="text-align:right">0.310252</td>
+</tr>
+</tbody>
+</table>
+<p><img src="file:///Users/kuba/studia/statystyka/lab01/zad4/mu4_theta4.png" alt="Boxplot4 μ=4, θ=4"></p>
+<p><strong>Podsumowanie estymatorów μ=4, θ=4</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">estimator</th>
+<th style="text-align:right">variance</th>
+<th style="text-align:right">bias</th>
+<th style="text-align:right">mse</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Theta_1</td>
+<td style="text-align:right">0.651435</td>
+<td style="text-align:right">0.00536937</td>
+<td style="text-align:right">0.651464</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_2</td>
+<td style="text-align:right">0.67091</td>
+<td style="text-align:right">0.0481571</td>
+<td style="text-align:right">0.673229</td>
+</tr>
+<tr>
+<td style="text-align:left">Theta_3</td>
+<td style="text-align:right">0.361556</td>
+<td style="text-align:right">-2.14499</td>
+<td style="text-align:right">4.96255</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Komentarz:</strong></p>
+<ul>
+<li>$\theta_1$ jest najlepszym z rozważanych estymatorów. Jest nieobciążony i ma najmniejszy mse.</li>
+<li>$\theta_2$ jest słabszym estymatorem niż $\theta_1$ ale nadal ma dobre charakterystyki.</li>
+<li>$\theta_3$ nie jest dobrym estymatorem. Znacząco wyróżnia się na tle reszty. Jest silnie zaniżony. Ma małą wariancję, natomiast nie jest to istotna zaleta patrząc na bias i mse.</li>
+<li>Wszystkie estymatory są nieczułe na zmianę parametru μ, co jest plusem.</li>
+</ul>
+
+</body>
+</html>
