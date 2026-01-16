@@ -94,3 +94,83 @@ Przedziały ufności (CI) dotyczą estymacji **średniej** wartości oczekiwanej
 Wzór na błąd standardowy predykcji zawiera dodatkowy składnik wariancji błędu losowego ($\\sigma^2$), którego nie ma we wzorze na błąd estymacji średniej:
 $$ s^2_{pred} = MSE \left( 1 + \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\\sum(X_i - \bar{X})^2} \right) $$
 Jedynka w nawiasie odpowiada za zmienność samej nowej obserwacji wokół średniej. Dlatego przedziały predykcyjne muszą uwzględniać zarówno niepewność co do położenia linii regresji (jak CI), jak i naturalny rozrzut danych wokół tej linii, przez co są zawsze szersze.
+
+## Zadanie 2
+
+W tym zadaniu analizujemy dane z pliku `tabela1_6.txt` dotyczące 78 uczniów. Badamy zależności między średnią ocen (GPA), wynikiem testu IQ oraz punktacją w teście PH.
+
+### a) Regresja liniowa GPA od IQ
+
+Model regresji:
+$$ GPA = \beta_0 + \beta_1 \cdot IQ + \epsilon $$
+
+Z wykresu (poniżej) widać dodatnią korelację między IQ a GPA.
+
+![](zad2/plot_a_gpa_iq.png)
+
+Równanie regresji (z biblioteki):
+$$ GPA = -3.5571 + 0.1010 \cdot IQ $$
+
+Współczynnik determinacji $R^2$:
+
+| Parametr   | Metryka   |   Teoretycznie |   Biblioteka |
+|:-----------|:----------|---------------:|-------------:|
+| R^2        | Wartość   |       0.401615 |     0.401615 |
+
+Model wyjaśnia około 40.16% zmienności GPA na podstawie wyniku IQ.
+
+### b) Test istotności korelacji (Test F)
+
+Testujemy hipotezę, że GPA nie jest skorelowane z IQ, co w modelu liniowym jest równoważne warunkowi, że współczynnik kierunkowy (slope) jest równy 0.
+
+Hipotezy:
+- $H_0: \beta_1 = 0$ (Brak zależności liniowej, GPA nieskorelowane z IQ)
+- $H_1: \beta_1 \neq 0$ (Istnieje zależność liniowa)
+
+Wyniki testu F:
+
+| Parametr      | Metryka            |   Teoretycznie |   Biblioteka |
+|:--------------|:-------------------|---------------:|-------------:|
+| Statystyka F  | Wartość            |   51.0085      | 51.0085      |
+| P-wartość (F) | Prawdopodobieństwo |    4.73734e-10 |  4.73734e-10 |
+
+**Rozkład F przy założeniu $H_0$:** Rozkład F z $(1, 76)$ stopniami swobody.
+**Wartość krytyczna** dla $\alpha = 0.05$: $F_{kryt} \approx 3.966760$.
+
+**Decyzja:**
+Ponieważ p-wartość ($4.74 \cdot 10^{-10}$) jest mniejsza od poziomu istotności $\alpha = 0.05$ (oraz $F_{stat} > F_{kryt}$), **odrzucamy hipotezę zerową**.
+
+**Wniosek:**
+Istnieje istotna statystycznie zależność liniowa między inteligencją (IQ) a średnią ocen (GPA). Wynik testu IQ pozwala w pewnym stopniu przewidywać wyniki w nauce.
+
+### c) Predykcja GPA na podstawie IQ
+
+Przewidywane wartości GPA oraz 90% przedziały predykcyjne dla uczniów o IQ: 75, 100, 140.
+
+|       IQ |   Predicted GPA |   Lower 90% |   Upper 90% |
+|---------:|----------------:|------------:|------------:|
+|  75.0000 |          4.0196 |      1.1659 |      6.8732 |
+| 100.0000 |          6.5451 |      3.7975 |      9.2927 |
+| 140.0000 |         10.5860 |      7.7503 |     13.4216 |
+
+### d) Wykres z 90% przedziałami predykcyjnymi
+
+Poniższy wykres przedstawia dane, prostą regresji oraz 90% pasmo predykcji (szary obszar).
+
+![](zad2/plot_d_predykcja.png)
+
+Liczba obserwacji poza 90% przedziałem predykcyjnym: **6** (na 78 obserwacji).
+Stanowi to **7.69%** wszystkich obserwacji, co jest zgodne z oczekiwaniami dla przedziału 90% (oczekujemy ok. 10% obserwacji poza przedziałem).
+
+### e) Regresja liniowa GPA od PH
+
+Analiza zależności GPA od wyniku testu PH.
+
+![](zad2/plot_e_gpa_ph.png)
+
+Porównanie współczynników determinacji $R^2$:
+- Model GPA ~ IQ: $R^2 \approx 0.4016$
+- Model GPA ~ PH: $R^2 \approx 0.2936$
+
+**Wniosek:**
+Zmienna **IQ** jest lepszym predyktorem średniej ocen (GPA) niż wynik testu PH, ponieważ model oparty na IQ wyjaśnia większą część wariancji GPA (ok. 40% vs 29%).
