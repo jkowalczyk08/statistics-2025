@@ -26,7 +26,7 @@ $$ y = -0.58 + 15.04 x $$
 
 ### b) 95% Przedziały Ufności dla Slope'a i Intersepta
 
-Poniższa tabela przedstawia punktowe estymatory oraz 95% przedziały ufności dla wyrazu wolnego ($\beta_0$) i współczynnika kierunkowego ($\beta_1$). Wyniki obliczone ręcznie są zgodne z wynikami z biblioteki.
+Poniższa tabela przedstawia punktowe estymatory oraz 95% przedziały ufności dla wyrazu wolnego ($\beta_0$) i współczynnika kierunkowego ($\beta_1$). Wyniki obliczone "ręcznie" są zgodne z wynikami z biblioteki.
 
 | Parametr           | Metryka   | Teoretycznie           | Biblioteka             |
 |:-------------------|:----------|:-----------------------|:-----------------------|
@@ -50,8 +50,8 @@ Hipotezy:
 | Slope (Beta 1)     | p-wartość    |       0        |  4.00903e-31 |
 
 **Wnioski:**
-- **Slope ($\\beta_1$):** p-wartość $\approx 0 < 0.05$. Odrzucamy $H_0$. Istnieje istotna statystycznie zależność liniowa między liczbą kopiarek a czasem obsługi. Każda dodatkowa kopiarka zwiększa oczekiwany czas obsługi o około 15 godzin.
-- **Intercept ($\\beta_0$):** p-wartość $\approx 0.84 > 0.05$. Nie ma podstaw do odrzucenia $H_0$. Wyraz wolny nie różni się istotnie od zera. W kontekście zadania oznacza to, że przy zerowej liczbie maszyn czas obsługi jest bliski zeru, co jest logiczne.
+- **Slope ($\beta_1$):** p-wartość $\approx 0 < 0.05$. Odrzucamy $H_0$. Istnieje istotna statystycznie zależność liniowa między liczbą kopiarek a czasem obsługi. Każda dodatkowa kopiarka zwiększa oczekiwany czas obsługi.
+- **Intercept ($\beta_0$):** p-wartość $\approx 0.84 > 0.05$. Nie ma podstaw do odrzucenia $H_0$. Wyraz wolny nie różni się istotnie od zera. W kontekście zadania oznacza to, że przy zerowej liczbie maszyn czas obsługi jest bliski zeru, co jest logiczne.
 
 ### d) Przedział Ufności dla Wartości Oczekiwanej
 
@@ -66,7 +66,7 @@ Estymujemy średni czas obsługi dla $k$ maszyn.
 |  25 |            375.301  |                 355.74    |                  394.862  |     39.1219  |            375.301  |                 355.74    |                  394.862  |
 | 100 |           1502.94   |                1410.46    |                 1595.43   |    184.966   |           1502.94   |                1410.46    |                 1595.43   |
 
-**Wniosek:** Długość przedziału ufności zależy od odległości $k$ od średniej liczby maszyn w próbie ($\\bar{x} \approx 5.11$). Im dalej punkt $k$ znajduje się od $\\bar{x}$, tym przedział jest szerszy (większa niepewność estymacji średniej). Najwęższy przedział obserwujemy dla $k=5$, które jest najbliżej średniej.
+**Wniosek:** Długość przedziału ufności zależy od odległości $k$ od średniej liczby maszyn w próbie ($\bar{x} \approx 5.11$). Im dalej punkt $k$ znajduje się od $\\bar{x}$, tym przedział jest szerszy (większa niepewność estymacji średniej). Najwęższy przedział obserwujemy dla $k=5$, które jest najbliżej średniej.
 
 ### e) Przedział Predykcyjny dla Nowej Obserwacji
 
@@ -85,15 +85,13 @@ Przewidujemy czas obsługi dla konkretnego przypadku serwisowania $k$ maszyn.
 
 ### f) Wizualizacja Przedziałów
 
-Na poniższym wykresie przedstawiono dane, linię regresji oraz 95% pasma ufności (zielone) i predykcji (pomarańczowe).
+Na poniższym wykresie przedstawiono dane, linię regresji oraz 95% przedziały ufności (zielone) i predykcji (pomarańczowe).
 
 ![](zad1/plot_f.png)
 
 **Wyjaśnienie różnicy w szerokości przedziałów:**
 Przedziały ufności (CI) dotyczą estymacji **średniej** wartości oczekiwanej ($E[Y|X]$), podczas gdy przedziały predykcyjne (PI) dotyczą **pojedynczej przyszłej obserwacji** ($Y_{new}$).
-Wzór na błąd standardowy predykcji zawiera dodatkowy składnik wariancji błędu losowego ($\\sigma^2$), którego nie ma we wzorze na błąd estymacji średniej:
-$$ s^2_{pred} = MSE \left( 1 + \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\\sum(X_i - \bar{X})^2} \right) $$
-Jedynka w nawiasie odpowiada za zmienność samej nowej obserwacji wokół średniej. Dlatego przedziały predykcyjne muszą uwzględniać zarówno niepewność co do położenia linii regresji (jak CI), jak i naturalny rozrzut danych wokół tej linii, przez co są zawsze szersze.
+Przedziały predykcyjne muszą uwzględniać zarówno niepewność co do położenia linii regresji (jak CI), jak i naturalny rozrzut danych wokół tej linii, przez co są zawsze szersze.
 
 ## Zadanie 2
 
@@ -108,7 +106,7 @@ Z wykresu (poniżej) widać dodatnią korelację między IQ a GPA.
 
 ![](zad2/plot_a_gpa_iq.png)
 
-Równanie regresji (z biblioteki):
+Równanie regresji:
 $$ GPA = -3.5571 + 0.1010 \cdot IQ $$
 
 Współczynnik determinacji $R^2$:
@@ -124,8 +122,8 @@ Model wyjaśnia około 40.16% zmienności GPA na podstawie wyniku IQ.
 Testujemy hipotezę, że GPA nie jest skorelowane z IQ, co w modelu liniowym jest równoważne warunkowi, że współczynnik kierunkowy (slope) jest równy 0.
 
 Hipotezy:
-- $H_0: \beta_1 = 0$ (Brak zależności liniowej, GPA nieskorelowane z IQ)
-- $H_1: \beta_1 \neq 0$ (Istnieje zależność liniowa)
+- $H_0: \beta_1 = 0$
+- $H_1: \beta_1 \neq 0$
 
 Wyniki testu F:
 
@@ -168,9 +166,48 @@ Analiza zależności GPA od wyniku testu PH.
 
 ![](zad2/plot_e_gpa_ph.png)
 
+Równanie regresji: $GPA = 2.2259 + 0.0917 * PH$
+
 Porównanie współczynników determinacji $R^2$:
 - Model GPA ~ IQ: $R^2 \approx 0.4016$
 - Model GPA ~ PH: $R^2 \approx 0.2936$
 
 **Wniosek:**
 Zmienna **IQ** jest lepszym predyktorem średniej ocen (GPA) niż wynik testu PH, ponieważ model oparty na IQ wyjaśnia większą część wariancji GPA (ok. 40% vs 29%).
+
+## Zadanie 3
+
+Sprawdzane hipotezy $H_0: \beta_1 = 0$ $H_1: \beta_1 \neq 0$.
+
+Model generujący dane:
+$$ Y = 5 + \beta_1 X + \epsilon $$
+gdzie $X \sim N(0, \frac{1}{500} I)$ jest ustalony dla wszystkich symulacji.
+
+### Wyniki Symulacji
+
+Poniższa tabela przedstawia empiryczne prawdopodobieństwo odrzucenia hipotezy $H_0$ (dla $\alpha = 0.05$) w porównaniu z wartościami teoretycznymi.
+
+| Podpunkt   |   Beta1 | Rozkład błędu   |   Empiryczna |   Teoretyczna |
+|:-----------|--------:|:----------------|-------------:|--------------:|
+| a          |       0 | N(0, I)         |        0.065 |     0.05 ($\alpha$)      |
+| b          |       0 | Exp(1)          |        0.056 |     0.05 ($\alpha$)     |
+| c          |       0 | Logistic(0, 1)  |        0.042 |     0.05 ($\alpha$)     |
+| d          |       2 | N(0, I)         |        0.232 |     0.215359 (Moc) |
+| e          |       2 | Exp(1)          |        0.206 |     0.215359 (Moc) |
+| f          |       2 | Logistic(0, 1)  |        0.109 |     0.0987785 (Moc) |
+
+![](zad3/power_comparison.png)
+
+### Wnioski
+
+#### 1. Błąd I rodzaju (Gdy $H_0$ jest prawdziwa, $\beta_1 = 0$)
+W przypadkach a), b) i c), gdzie nie ma rzeczywistej zależności liniowej:
+- Oczekiwany poziom błędu I rodzaju wynosi $\alpha = 0.05$.
+- Wyniki empiryczne (0.065, 0.056, 0.042) są zbliżone do 0.05.
+- **Wniosek:** Test t-Studenta jest **odporny** na naruszenie założenia o normalności rozkładu reszt przy dużej liczbie prób ($n=200$). Nawet dla niesymetrycznego rozkładu wykładniczego (b) czy grubooogonowego rozkładu logistycznego (c), prawdopodobieństwo błędnego odrzucenia $H_0$ jest bliskie założonemu poziomowi istotności.
+
+#### 2. Moc testu (Gdy $H_0$ jest fałszywa, $\beta_1 = 2$)
+W przypadkach d), e) i f), gdzie istnieje zależność:
+- **d) Rozkład Normalny:** Empiryczna moc (0.232) jest zgodna z teoretyczną (0.215). Jest to punkt odniesienia.
+- **e) Rozkład Wykładniczy:** Mimo silnej asymetrii rozkładu błędów, moc testu (0.206) jest bardzo zbliżona do mocy dla rozkładu normalnego o tej samej wariancji. Potwierdza to, że przy dużej próbie test t zachowuje swoją moc także dla rozkładów innych niż normalny.
+- **f) Rozkład Logistyczny:** Moc testu drastycznie spadła do ok. 0.109. Wynika to z faktu, że standardowy rozkład logistyczny ma wariancję $\frac{\pi^2}{3} \approx 3.29$, czyli ponad 3-krotnie większą niż standardowy rozkład normalny. Większy szum utrudnia wykrycie zależności.
