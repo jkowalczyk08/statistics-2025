@@ -14,11 +14,17 @@ $$ y = \beta_0 + \beta_1 x + \epsilon $$
 ![](zad1/plot_a.png)
 
 Obliczone parametry regresji:
+
 - **Teoretyczne:**
+
   - $\beta_0 = -0.580157$
+
   - $\beta_1 = 15.035248$
+
 - **Biblioteczne (`statsmodels`):**
+
   - $\beta_0 = -0.580157$
+
   - $\beta_1 = 15.035248$
 
 Równanie regresji:
@@ -32,14 +38,16 @@ Poniższa tabela przedstawia punktowe estymatory oraz 95% przedziały ufności d
 |:-------------------|:----------|:-----------------------|:-----------------------|
 | Intercept (Beta 0) | Estymator | -0.580157              | -0.580157              |
 | Slope (Beta 1)     | Estymator | 15.035248              | 15.035248              |
-| Intercept (Beta 0) | 95% CI    | (-6.234843, 5.074529)  | [-6.234843, 5.074529]  |
-| Slope (Beta 1)     | 95% CI    | (14.061010, 16.009486) | [14.061010, 16.009486] |
+| Intercept (Beta 0) | 95% CI    | (-6.234843, 5.074529)  | (-6.234843, 5.074529)  |
+| Slope (Beta 1)     | 95% CI    | (14.061010, 16.009486) | (14.061010, 16.009486) |
 
 ### c) Test Istotności Parametrów
 
 Przeprowadzono testy istotności dla obu parametrów.
 Hipotezy:
+
 - $H_0: \beta_i = 0$
+
 - $H_1: \beta_i \neq 0$
 
 | Parametr           | Metryka      |   Teoretycznie |   Biblioteka |
@@ -50,7 +58,9 @@ Hipotezy:
 | Slope (Beta 1)     | p-wartość    |       0        |  4.00903e-31 |
 
 **Wnioski:**
+
 - **Slope ($\beta_1$):** p-wartość $\approx 0 < 0.05$. Odrzucamy $H_0$. Istnieje istotna statystycznie zależność liniowa między liczbą kopiarek a czasem obsługi. Każda dodatkowa kopiarka zwiększa oczekiwany czas obsługi.
+
 - **Intercept ($\beta_0$):** p-wartość $\approx 0.84 > 0.05$. Nie ma podstaw do odrzucenia $H_0$. Wyraz wolny nie różni się istotnie od zera. W kontekście zadania oznacza to, że przy zerowej liczbie maszyn czas obsługi jest bliski zeru, co jest logiczne.
 
 ### d) Przedział Ufności dla Wartości Oczekiwanej
@@ -66,7 +76,7 @@ Estymujemy średni czas obsługi dla $k$ maszyn.
 |  25 |            375.301  |                 355.74    |                  394.862  |     39.1219  |            375.301  |                 355.74    |                  394.862  |
 | 100 |           1502.94   |                1410.46    |                 1595.43   |    184.966   |           1502.94   |                1410.46    |                 1595.43   |
 
-**Wniosek:** Długość przedziału ufności zależy od odległości $k$ od średniej liczby maszyn w próbie ($\bar{x} \approx 5.11$). Im dalej punkt $k$ znajduje się od $\\bar{x}$, tym przedział jest szerszy (większa niepewność estymacji średniej). Najwęższy przedział obserwujemy dla $k=5$, które jest najbliżej średniej.
+**Wniosek:** Długość przedziału ufności zależy od odległości $k$ od średniej liczby maszyn w próbie ($\bar{x} \approx 5.11$). Im dalej punkt $k$ znajduje się od $\bar{x}$, tym przedział jest szerszy (większa niepewność estymacji średniej). Najwęższy przedział obserwujemy dla $k=5$, które jest najbliżej średniej.
 
 ### e) Przedział Predykcyjny dla Nowej Obserwacji
 
@@ -122,7 +132,9 @@ Model wyjaśnia około 40.16% zmienności GPA na podstawie wyniku IQ.
 Testujemy hipotezę, że GPA nie jest skorelowane z IQ, co w modelu liniowym jest równoważne warunkowi, że współczynnik kierunkowy (slope) jest równy 0.
 
 Hipotezy:
+
 - $H_0: \beta_1 = 0$
+
 - $H_1: \beta_1 \neq 0$
 
 Wyniki testu F:
@@ -169,7 +181,9 @@ Analiza zależności GPA od wyniku testu PH.
 Równanie regresji: $GPA = 2.2259 + 0.0917 * PH$
 
 Porównanie współczynników determinacji $R^2$:
+
 - Model GPA ~ IQ: $R^2 \approx 0.4016$
+
 - Model GPA ~ PH: $R^2 \approx 0.2936$
 
 **Wniosek:**
@@ -201,13 +215,21 @@ Poniższa tabela przedstawia empiryczne prawdopodobieństwo odrzucenia hipotezy 
 ### Wnioski
 
 #### 1. Błąd I rodzaju (Gdy $H_0$ jest prawdziwa, $\beta_1 = 0$)
+
 W przypadkach a), b) i c), gdzie nie ma rzeczywistej zależności liniowej:
+
 - Oczekiwany poziom błędu I rodzaju wynosi $\alpha = 0.05$.
+
 - Wyniki empiryczne (0.065, 0.056, 0.042) są zbliżone do 0.05.
+
 - **Wniosek:** Test t-Studenta jest **odporny** na naruszenie założenia o normalności rozkładu reszt przy dużej liczbie prób ($n=200$). Nawet dla niesymetrycznego rozkładu wykładniczego (b) czy grubooogonowego rozkładu logistycznego (c), prawdopodobieństwo błędnego odrzucenia $H_0$ jest bliskie założonemu poziomowi istotności.
 
 #### 2. Moc testu (Gdy $H_0$ jest fałszywa, $\beta_1 = 2$)
+
 W przypadkach d), e) i f), gdzie istnieje zależność:
+
 - **d) Rozkład Normalny:** Empiryczna moc (0.232) jest zgodna z teoretyczną (0.215). Jest to punkt odniesienia.
+
 - **e) Rozkład Wykładniczy:** Mimo silnej asymetrii rozkładu błędów, moc testu (0.206) jest bardzo zbliżona do mocy dla rozkładu normalnego o tej samej wariancji. Potwierdza to, że przy dużej próbie test t zachowuje swoją moc także dla rozkładów innych niż normalny.
+
 - **f) Rozkład Logistyczny:** Moc testu drastycznie spadła do ok. 0.109. Wynika to z faktu, że standardowy rozkład logistyczny ma wariancję $\frac{\pi^2}{3} \approx 3.29$, czyli ponad 3-krotnie większą niż standardowy rozkład normalny. Większy szum utrudnia wykrycie zależności.
