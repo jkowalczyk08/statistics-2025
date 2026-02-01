@@ -35,7 +35,7 @@ $H_1: \exists_{i \in \{1, 2, 3\}} : \beta_i \neq 0$
 | p-wartość F  |    3.04311e-07 |  3.04311e-07 |
 
 **Konkluzja:**
-Ponieważ p-wartość jest znacznie mniejsza od poziomu istotności $\alpha = 0.05$, **odrzucamy hipotezę zerową**. Istnieje istotna statystycznie zależność liniowa między rozważanymi zmiennymi objaśniającymi a satysfakcją pacjenta. Model wyjaśnia ok. 54% zmienności satysfakcji.
+Ponieważ p-wartość jest znacznie mniejsza od poziomu istotności $\alpha = 0.05$, odrzucamy hipotezę zerową. Istnieje istotna statystycznie zależność liniowa między rozważanymi zmiennymi objaśniającymi a satysfakcją pacjenta. Model wyjaśnia ok. 54% zmienności satysfakcji.
 
 ### c)
 
@@ -57,7 +57,7 @@ $H_1: \beta_i \neq 0$
 
 - **Wiek:** p-wartość $\approx 0.065 > 0.05$. Brak podstaw do odrzucenia $H_0$. Zmienna nie jest istotna statystycznie na poziomie 0.05, choć jest bliska granicy istotności.
 - **Ciężkość choroby:** p-wartość $\approx 0.74 > 0.05$. Brak podstaw do odrzucenia $H_0$. Zmienna nie jest istotna statystycznie.
-- **Poziom niepokoju:** p-wartość $\approx 0.002 < 0.05$. **Odrzucamy $H_0$**. Zmienna jest istotna statystycznie.
+- **Poziom niepokoju:** p-wartość $\approx 0.002 < 0.05$. Odrzucamy $H_0$. Zmienna jest istotna statystycznie.
 
 **Związek z przedziałami ufności:**
 Przedziały ufności dla zmiennych nieistotnych statystycznie (Wiek, Ciężkość) zawierają zero. Przedział ufności dla zmiennej istotnej (Niepokój) nie zawiera zera (jest w całości dodatni), co potwierdza wniosek z testu t.
@@ -81,11 +81,13 @@ P-wartość testu Shapiro-Wilka jest większa od 0.05, zatem nie ma podstaw do o
 
 ### e)
 
-Porównujemy **model pełny** (Wiek, Ciężkość, Niepokój) z **modelem zredukowanym** zawierającym tylko zmienną **Niepokój**.
+Porównujemy model pełny (Wiek, Ciężkość, Niepokój) z modelem zredukowanym zawierającym tylko zmienną Niepokój.
 
 Hipotezy:
-- $H_0: \beta_{wiek} = \beta_{ciężkość} = 0$
-- $H_1: \beta_{wiek} \neq 0$ lub $\beta_{ciężkość} \neq 0$
+
+$H_0: \beta_{wiek} = \beta_{ciężkość} = 0$
+
+$H_1: \beta_{wiek} \neq 0$ lub $\beta_{ciężkość} \neq 0$
 
 Wyniki ogólnego testu F ($F(2, 42) = 4.21$):
 
@@ -95,4 +97,4 @@ Wyniki ogólnego testu F ($F(2, 42) = 4.21$):
 | p-wartość    |       0.021531 |     0.021531 |
 
 **Konkluzja:**
-Ponieważ p-wartość ($0.0215$) jest mniejsza od $\alpha = 0.05$, **odrzucamy hipotezę zerową**. Oznacza to, że model pełny jest lepszy niż model oparty wyłącznie na poziomie niepokoju.
+Ponieważ p-wartość ($0.0215$) jest mniejsza od $\alpha = 0.05$, odrzucamy hipotezę zerową. Oznacza to, że model pełny jest lepszy niż model oparty wyłącznie na poziomie niepokoju.
